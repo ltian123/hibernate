@@ -1,0 +1,106 @@
+框架
+	通用代码的封装
+
+	简化开发
+	程序结构良好
+
+	表示层
+		struts1 struts2 springmvc
+
+	业务层
+		spring
+
+	持久层
+		mybatis hibernate jpa
+
+
+hibernate
+	冬眠
+	持久层框架
+
+jdbc是java访问数据库的唯一手段
+EJB2 Entity Java Bean 重量级框架
+hibernate Ibatis MyBatis
+EJB3	JPA	规范
+
+
+功能
+	封装了jdbc
+	ORM
+	帮我们写sql
+	性能优化
+	
+
+
+ORM
+	对象关系映射
+	类		表
+	属性get/set	字段
+	关系		关系
+
+
+jar包 1.2章
+
+hibernate.cfg.xml配置 3.3章
+
+dialect 方言 3.4.1章
+
+hibernate类型 5.2.2章
+
+generator主键生成方式 5.1.4.1章
+
+
+Hibernate核心API
+	Configuration		用于解析配置文件，并创建SessionFactory对象
+	SessionFactory		用于创建Session的工厂，线程安全，很消耗资源，单例
+	Session			会话，持久化管理器，线程不安全
+	Transaction		事务管理器
+
+动态DML
+	dynamic-insert="true"
+	dynamic-update="true"
+	
+hibernate对象状态
+	临时态	内存里有，而数据库中没有一条记录跟他对应，对象没有被Session管理
+
+	游离态	内存里有，而且数据库中有对应的记录，这个没有被Session管理
+
+	持久态	内存里有，而且数据库中有对应的记录，这个被Session管理，对象状态改变，hibernate会自动更新数据库
+
+insert="false" 
+update="false"
+
+
+根据主键查询
+	get	没有延迟加载，如果没有找到记录，返回null
+	load	有延迟加载，如果没有找到记录，抛出org.hibernate.ObjectNotFoundException
+
+
+延迟加载（懒加载）
+	调用方法不查询数据库
+	第一次使用数据时查询
+
+
+
+
+
+package day01;
+public class Person$$EnhancerByCGLIB$$8e0da111 extends Person{
+	private boolean isFirst=true;
+	public String getName(){
+		//判断是否是第一次调用
+			//查询数据库
+			//为属性赋值
+
+		isFirst=false;
+		return super.getName();
+	}
+}
+
+
+
+
+
+172.16.1.11
+teacher
+itany123

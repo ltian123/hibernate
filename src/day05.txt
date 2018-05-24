@@ -1,0 +1,199 @@
+表示层
+	显示逻辑
+	跟用户做数据交互
+	调用业务层完成核心业务逻辑
+
+业务层
+	核心业务逻辑
+	调用持久层做持久化操作
+	交叉业务逻辑处理
+
+持久层
+	单一的持久化操作
+
+
+action
+	modfiy(){
+
+
+	}
+
+modify（）{
+	update(); +1000
+	update(); -1000
+-------------------------------
+
+
+}
+
+
+update(){}
+
+
+立项
+需求分析	
+概要设计
+详细设计
+编码
+测试
+部署
+维护
+
+
+人月神话
+
+5人月
+
+
+
+insert
+deleteById
+delete
+update
+selectById
+selectAll
+
+
+
+session.save(Object)
+
+
+
+
+简单工厂模式
+	分离调用者和实现者，解耦合
+
+
+	缺点
+		每个工厂只提供一种类型的对象，程序中会有很多的工厂
+		实现者换了，需要修改工厂的代码
+		每次获得的是新对象，影响效率
+
+单例模式
+	程序运行期间，有且只有一个对象
+
+模板模式
+	处理过程固定，其中有可变的代码
+
+静态代理模式
+	在不改变现有代码基础上，添加新的功能	
+
+
+
+
+
+
+
+持久层使用模板模式
+	模板类
+		封装具体持久化技术的代码，简化开发
+		异常转换
+
+	回调接口
+
+
+回调接口
+interface I{
+	public abstract void callback();
+}
+
+模板方法
+public void f(String s,I i){
+	xx
+	xx
+	xxx
+	
+	s
+	
+	xxx
+
+	i.callback();
+
+	xx
+	xx
+	xxx
+}
+
+
+
+
+
+
+
+
+
+public class C{
+	private static C c;
+	
+	static{
+		c=new C();
+	}
+
+	private C(){}
+
+	public static C getC(){
+		return c;
+	}
+
+}
+
+
+public class C{
+	private static C c;
+
+	private C(){}
+
+	public static C getC(){
+		if(c==null){
+			c=new C();
+		}
+		return c;
+	}
+
+}
+
+
+
+
+
+service接口
+	事务代理
+
+			impl实现类
+
+			UserServiceImpl->dao接口
+						impl实现类
+
+						UserDaoImpl->template
+
+
+
+
+
+//代理接口/业务接口
+public interface LOL{
+	public void play();
+}
+
+
+//目标类
+public class 拳头 implements LOL {
+	public void play(){
+		xxx
+	}
+}
+
+//代理类
+public class 腾讯 implements LOL {
+
+	private LOL lol;
+
+	public 腾讯(){
+		lol=new 拳头();
+	}
+
+	public void paly(){
+		//收费
+		lol.play();
+	}
+}

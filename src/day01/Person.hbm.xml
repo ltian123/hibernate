@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="day01">
+	<class name="Person" table="t_person" dynamic-insert="true" dynamic-update="false">
+<!-- 	<id name="id" column="id" type="java.lang.Integer"> -->
+<!-- 		<id name="id" column="id" type="integer"> -->
+		<id name="id">
+<!-- 			<generator class="identity"></generator>	 -->
+<!-- 			<generator class="sequence"> -->
+<!-- 				<param name="sequence">s_person</param> -->
+<!-- 			</generator> -->
+			<generator class="native">
+				<param name="sequence">s_person</param>
+			</generator>
+		</id>
+		<property name="name"></property>
+		<property name="birthday" type="date" update="false"></property>
+		<property name="sex"></property>
+		<property name="hob" column="hobbies"></property>
+	</class>
+	
+	<query name="selectByName">
+		from Person p
+		where p.name=:name
+	</query>
+	
+	<sql-query name="selectAll">
+		<return alias="p" class="day01.Person"></return>
+		select *
+		from t_person p
+	</sql-query>
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+

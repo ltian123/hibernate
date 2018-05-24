@@ -1,0 +1,173 @@
+一对一
+	一辆汽车对应一个发动机
+
+	汽车		发动机
+	Car		Engine
+	  id		  id
+	  name		  name
+	  engine	  car
+-------------------------------------------------
+	t_car1		t_engine1
+	  id		  id
+	  name		  name
+			  car_id FK UK
+-------------------------------------------------
+	t_car2		t_engine2
+	  id		  id	 PK FK
+	  name		  name
+
+
+继承
+	管理员和普通用户都是系统用户
+	系统用户
+	User
+		id
+		username
+		password
+
+	Manager		Member
+	  phone		  email
+
+-------------------------------------------------
+	t_user1			
+		id
+		username
+		password
+		phone
+		email
+		type	ma/me
+
+-------------------------------------------------
+	t_manager1	t_member1
+	  id		  id
+	  username	  username
+	  password	  password
+	  phone		  email
+
+-------------------------------------------------
+	t_user2
+		id
+		username
+		password
+
+	t_manager2	t_member2
+	  phone		  email
+	  user_id	  user_id
+
+
+一表：所有属性放到一张表中，用一个字段区分类型
+	多态查询效率最高，但会浪费数据库空间
+
+一个子类一张表：只为子类建表，父类属性放到子类表中
+	多态查询效率最低，不考虑多态查询效率最高
+
+一个类一张表：每个类建一张表，子类表使用外键跟父类表做关系
+	节省空间，但效率低，不建议使用
+
+
+
+    select
+        user.id,
+        user.username,
+        case 
+            when manager.user_id is not null then 'ma' 
+            when member.user_id is not null then 'me'
+            when user.id is not null then 0 
+        end as type 
+    from
+        t_user2 user 
+    left outer join
+        t_manager2 manager 
+            on user.id=manager.user_id 
+    left outer join
+        t_member2 member 
+            on user.id=member.user_id
+
+组件
+	People
+		id
+		Name name
+
+	Name
+		firstName
+		lastName
+-----------------------------------------------
+	t_people
+		id
+		first_name
+		last_name
+
+
+实际开发中
+	多对一，一对多使用最多
+	多对一单向关系
+	一对多双向关系
+
+	多对多基本不使用，而是将一个多对多转换成若干个一对多或多对一
+
+	一对一会用，但大部分情况是将一个一对一做成一对多，为了系统的扩展性
+
+	继承映射会用，根据程序设计
+
+	组件映射会用，根据程序设计
+
+
+JPA
+	注解
+
+	@Entity
+		表示实体类
+
+	@Table
+		表示表
+
+	@Id
+		表示主键
+
+	@Column
+		表示列（如果字段名和属性名相同，可以省略）
+
+	@Transient
+		表示忽略的属性
+
+	@ManyToOne
+
+	@JoinColumn
+
+	@OneToMany
+
+	@ManyToMany
+
+	@OneToOne
+
+	@MappedSuperclass
+
+	@Embedded
+
+
+
+Query
+	通过hql语句查询
+
+Cirteria
+	通过调用方法查询
+
+SQLQuery
+	通过sql语句查询
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
